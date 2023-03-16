@@ -8,8 +8,17 @@ local meterStarted = false
 local display = false
 local focus = false
 local taxiVehicles = {
-    "taxi"
+    "taxi",
 }
+local jobsAllowed = {
+    "taxi",
+}
+
+function HasTaxiJob()
+	local hasTaxiJob = jobsAllowed[LocalPlayer.state.job.name]
+	if hasTaxiJob == null or hasTaxiJob == false then return false end
+	return hasTaxiJob
+end
 
 function SetTaxi(vehicle)
 	DecorSetFloat(vehicle, fareDecor, tonumber(string.format("%.2f", fare)))
@@ -49,6 +58,7 @@ CreateThread(function()
 end)
 
 RegisterCommand("+taxi", function()
+	if not HasTaxiJob() then return end
     if not isDriver then return end
     if not focus then
         focus = true
@@ -69,7 +79,7 @@ CreateThread(function()
         local ped = PlayerPedId()
         local vehicle = GetVehiclePedIsIn(ped)
 
-        if vehicle ~= 0 and isTaxi(vehicle) then
+        if vehicle ~= 0 and isTaxi(vehicle) and HasTaxiJob() then
             local seat = GetPedInVehicleSeat(vehicle, -1)
             if not display then
                 display = true
