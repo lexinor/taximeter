@@ -11,13 +11,16 @@ local taxiVehicles = {
     "taxi",
 }
 local jobsAllowed = {
-    "taxi",
+    ["taxi"],
 }
 
 function HasTaxiJob()
 	local hasTaxiJob = jobsAllowed[LocalPlayer.state.job.name]
-	if hasTaxiJob == null or hasTaxiJob == false then return false end
-	return hasTaxiJob
+    if hasTaxiJob then 
+        return true 
+    else 
+        return false 
+    end
 end
 
 function SetTaxi(vehicle)
@@ -78,7 +81,6 @@ CreateThread(function()
         Wait(1000)
         local ped = PlayerPedId()
         local vehicle = GetVehiclePedIsIn(ped)
-
         if vehicle ~= 0 and isTaxi(vehicle) and HasTaxiJob() then
             local seat = GetPedInVehicleSeat(vehicle, -1)
             if not display then
