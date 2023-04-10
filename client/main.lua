@@ -74,7 +74,7 @@ RegisterCommand("+taxi", function()
     SetNuiFocusKeepInput(focus)
 end, false)
 RegisterCommand("-taxi", function()end, false)
-RegisterKeyMapping("+taxi", "Taxi meter", "keyboard", "f3")
+--RegisterKeyMapping("+taxi", "Taxi meter", "keyboard", "f3")
 
 CreateThread(function()
     while true do
