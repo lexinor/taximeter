@@ -81,7 +81,7 @@ CreateThread(function()
         Wait(1000)
         local ped = PlayerPedId()
         local vehicle = GetVehiclePedIsIn(ped)
-        if vehicle ~= 0 and isTaxi(vehicle) and HasTaxiJob() then
+        if vehicle ~= 0 and isTaxi(vehicle) then
             local seat = GetPedInVehicleSeat(vehicle, -1)
             if not display then
                 display = true
